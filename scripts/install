@@ -44,7 +44,7 @@ for file in $files; do
 
   # Link new dotfiles to home directory
   fancy_echo "Linking $filename to $DOTFILES_DIR/system/$filename"
-  ln -sf "${DOTFILES_DIR}/backups/$file" "${HOME}/.$file"
+  ln -sf $DOTFILES_DIR/system/$filename $HOME/$filename
 done
 
 # Finally Create gitconfig.local for personal git information
