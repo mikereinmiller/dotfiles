@@ -18,7 +18,7 @@ $ sh ~/.dotfiles/scripts/install
 Alternatively, you can install this into `~/.dotfiles` remotely without Git using curl.
 
 ```sh
-sh "`curl -fsSL https://raw.github.com/mikereinmiller/dotfiles/master/scripts/install`"
+bash -c "$(curl -fsSL raw.github.com/mikereinmiller/dotfiles/master/scripts/install)"
 ```
 
 ## Customize

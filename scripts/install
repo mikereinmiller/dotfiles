@@ -16,8 +16,8 @@ fancy_echo() {
 # :: Clone DOTFILES Repo (if !exist)
 # ------------------------------------------------------------------------------
 if [ ! -d $DOTFILES_DIR ]; then
-	fancy_echo "Cloning dotfiles..."
-	git clone master https://github.com/mikereinmiller/dotfiles.git $DOTFILES_DIR
+  fancy_echo "Cloning dotfiles..."
+  git clone git@github.com:mikereinmiller/dotfiles.git $DOTFILES_DIR
 fi
 
 # ------------------------------------------------------------------------------
