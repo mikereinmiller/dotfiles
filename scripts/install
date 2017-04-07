@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+set -e
+
+# ------------------------------------------------------------------------------
+# :: Load Global Variables and Functions
+# ------------------------------------------------------------------------------
+export DOTFILES_DIR="${HOME}/.dotfiles"
+
+fancy_echo() {
+  local fmt="$1"; shift
+  printf "\n$fmt\n" "$@"
+}
+
+# ------------------------------------------------------------------------------
+# :: Clone DOTFILES Repo (if !exist)
+# ------------------------------------------------------------------------------
+if [ ! -d $DOTFILES_DIR ]; then
+	fancy_echo "Cloning dotfiles..."
+	git clone master https://github.com/mikereinmiller/dotfiles.git $DOTFILES_DIR
+fi
+
+# ------------------------------------------------------------------------------
+# :: Backup and Link .dotfiles
+# ------------------------------------------------------------------------------
+
+# Create Backup directory !found
+if [ ! -d $DOTFILES_DIR/backups ]; then
+  mkdir $DOTFILES_DIR/backups
+fi
+
+# Grab all .files from 'system' directory
+files=$DOTFILES_DIR/system/.??*
+
+# For Each File, backup and create a symlink to new .file
+for file in $files; do 
+  filename=$(basename $file)
+
+  # Move original file to backup directory
+  if [ -f $HOME/$filename ]; then
+    fancy_echo "Backing up $filename to $DOTFILES_DIR/backups/$filename"
+    mv $HOME/$filename $DOTFILES_DIR/backups/$filename
+  fi
+
+  # Link new dotfiles to home directory
+  fancy_echo "Linking $filename to $DOTFILES_DIR/system/$filename"
+  ln -sf "${DOTFILES_DIR}/backups/$file" "${HOME}/.$file"
+done
+
+# Finally Create gitconfig.local for personal git information
+if [ ! -f $HOME/.gitconfig.local ]; then
+  fancy_echo "What is your GIT Author Name?"
+  read author_name
+  fancy_echo "What is your GIT Author Email?"
+  read author_email
+
+  echo "[user]\n\tname = $author_name\n\temail = $author_email\n" >> $HOME/.gitconfig.local
+
+  fancy_echo "Your custom gitconfig has been created, please make any additional changes to $HOME/.gitconfig.local"
+fi
