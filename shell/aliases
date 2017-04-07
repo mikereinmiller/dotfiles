@@ -21,13 +21,15 @@ alias db='cd ~/Dropbox'
 alias dl='cd ~/Downloads'
 alias dd='cd ~/Desktop'
 alias dw='cd ~/Workspace'
-alias ea='$EDITOR ~/dotfiles/zsh/aliases'
-alias ed='$EDITOR ~/dotfiles'
+alias ed='$EDITOR ~/.dotfiles'
+alias ea='$EDITOR ~/.dotfiles/shell/aliases'
+alias ef='$EDITOR ~/.dotfiles/shell/functions'
+alias eo='$EDITOR ~/.dotfiles/shell/oh-my-zsh'
+alias ez='$EDITOR ~/.dotfiles/system/.zshrc'
 alias eh='$EDITOR /etc/hosts'
-alias eo='$EDITOR ~/dotfiles/zsh/oh-my-zsh'
-alias ez='$EDITOR ~/.zshrc'
 alias hosts=eh
 alias zshrc=ez
+alias dotfiles=ed
 
 # OSX
 alias saf='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder'
