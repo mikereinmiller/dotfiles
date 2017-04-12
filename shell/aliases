@@ -64,10 +64,10 @@ alias grh='git reset HEAD'
 alias grhh='git reset HEAD --hard'
 alias gcl='git clone'
 alias gf='git fetch'
-alias gl='git log --oneline --decorate --color --graph'
-alias gla='git log --oneline --decorate --color --graph --all'
-alias glo='git log --oneline --decorate --color'
 alias glg='git log --stat --color'
+alias glo='git log --oneline --decorate --color'
+alias glog='git log --oneline --decorate --color --graph'
+alias gloa='git log --oneline --decorate --color --graph --all'
 alias glgg='git log --graph --color'
 alias glga='git log --graph --decorate --all'
 alias glgm='git log --graph --max-count=10'
@@ -78,14 +78,18 @@ alias gloa='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset
 # Bundler
 alias b='bundle'
 alias be='bundle exec'
-alias bef='bundle exec foreman start'
 alias bi='bundle install'
 alias bu='bundle update'
+alias bef='bundle exec foreman start'
+alias bes='bundle exec spec'
+alias ber='bundle exec rake'
 
 # Ruby
 alias rbv='rbenv versions'
 alias rbl='rbenv install -l'
 alias rbi='rbenv install'
+
+alias pre='pry -r ./config/environment'
 
 # Rails
 alias rs='rails server'
@@ -136,6 +140,6 @@ alias brun='brew uninstall'
 
 # Misc
 alias path='echo $PATH | tr -s ":" "\n"'
-alias reload='source ~/.zshrc && echo "ZSH config reloaded from ~/.zshrc"'
+alias reload="source ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
 alias reload!=reload
 alias src=reload
