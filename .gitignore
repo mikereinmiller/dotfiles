@@ -1,5 +1,7 @@
 # Remove files from backup directory
 backups
+.zsh.local
+.gitconfig.local
 
 # Folder view configuration files
 .DS_Store

@@ -48,3 +48,14 @@ $ sh ~/.dotfiles/scripts/uninstall
 ```
 
 Make sure all your dotfiles and settings have been restored and destroy the dotfile directory `rm -rf ~/.dotfiles`.
+
+## TODO
+Setup .git/hooks for post-checkout and post-merge
+Move .gitconfig & .gitconfig.local to .git/config && .git/config.local directory?
+https://robots.thoughtbot.com/use-git-hooks-to-automate-annoying-tasks
+https://gist.github.com/stefansundin/82051ad2c8565999b914
+https://gist.github.com/8bitDesigner/5869846
+https://gist.github.com/sindresorhus/7996717
+https://gist.github.com/betorobson/23e5914b51e844bac5eaa6032d6f3f88
+https://gist.github.com/GianlucaGuarini/8001627
+https://gist.github.com/phpdude/9464925

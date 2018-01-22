@@ -48,13 +48,13 @@ for file in $files; do
 done
 
 # Finally Create gitconfig.local for personal git information
-if [ ! -f $HOME/.gitconfig.local ]; then
+if [ ! -f $DOTFILES/.gitconfig.local ]; then
   fancy_echo "What is your GIT Author Name?"
   read author_name
   fancy_echo "What is your GIT Author Email?"
   read author_email
 
-  echo "[user]\n\tname = $author_name\n\temail = $author_email\n" >> $HOME/.gitconfig.local
+  echo "[user]\n\tname = $author_name\n\temail = $author_email\n" >> $DOTFILES_DIR/.gitconfig.local
 
-  fancy_echo "Your custom gitconfig has been created, please make any additional changes to $HOME/.gitconfig.local"
+  fancy_echo "Your custom gitconfig has been created, please make any additional changes to $DOTFILES/.gitconfig.local"
 fi
