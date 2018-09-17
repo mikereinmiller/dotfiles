@@ -135,11 +135,34 @@ alias rr='rake routes'
 alias rrg='rake routes | grep'
 alias rt='rake test'
 
+# Elixir / Phoenix - https://hexdocs.pm/phoenix/phoenix_mix_tasks.html
+alias imix='iex -S mix'
+alias imixs='iex -S mix phx.server'
+alias mec='mix ecto.create'
+alias med='mix ecto.drop'
+alias mem='mix ecto.migrate'
+alias mer='mix ecto.rollback'
+alias megr='mix ecto.gen.repo'
+alias megm='mix ecto.gen.migration'
+alias mpgc='mix phx.gen.channel'
+alias mpgco='mix phx.gen.context'
+alias mpge='mix phx.gen.embedded'
+alias mpgh='mix phx.gen.html'
+alias mpgj='mix phx.gen.json'
+alias mpgp='mix phx.gen.presence'
+alias mpgs='mix phx.gen.schema'
+alias mpgse='mix phx.gen.secret'
+alias mpgn='mix phx.new'
+alias mps='mix phx.server'
+alias mpr='mix phx.routes'
+
 # NPM
 alias npmg='npm i -g'
 alias npms='npm i -S'
 alias npmd='npm i -D'
 alias npmo='npm outdated'
+alias npmog='npm outdated -g --depth=0'
+alias npmogu='npm -gp outdated | cut -d: -f4 | xargs -n1 npm -g install'
 alias npml='npm list --depth=0'
 alias npmgl='npm list -g --depth=0'
 
@@ -172,6 +195,9 @@ alias reload="source ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
 alias reload!=reload
 alias src=reload
 
-elixirVersion=$(elixir -v)
+# elixirVersion=$(elixir -v)
 # alias versions="echo 'Ruby: $(ruby -v)' '\nNode: $(node -v)' '\nNPM: $(npm -v)' '\nYarn: $(yarn --version)' '\nElixir: ${elixirVersion: -5}'"
-alias versions="echo 'Ruby: $(ruby -v)' '\nNode: $(node -v)' '\nNPM: $(npm -v)' '\nElixir: ${elixirVersion: -5}'"
+# alias versions="echo 'Ruby: $(ruby -v)' '\nNode: $(node -v)' '\nNPM: $(npm -v)' '\nElixir: ${elixirVersion: -5}'"
+
+# Substitue 'code-insiders' for 'code'
+alias code=code-insiders
