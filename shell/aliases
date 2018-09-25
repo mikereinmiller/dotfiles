@@ -21,9 +21,10 @@ alias lpid='lsof -i tcp:3000'
 alias kpid='kill -9'
 
 # Exa LS alternative
-alias exl='exa -l'
-alias exla='exa -la'
-alias exlg='exa -la --git'
+# if installed.
+# alias exl='exa -l'
+# alias exla='exa -la'
+# alias exlg='exa -la --git'
 
 # Quick File Views / Edits
 alias db='cd ~/Dropbox'
@@ -95,9 +96,11 @@ alias gsl='git shortlog -sn'
 # alias gdabf=git for-each-ref --format '%(refname:short)' refs/heads | grep -v "master" | grep -v "$(git_current_branch)" | xargs git branch -D
 
 # https://github.com/arzzen/git-quick-stats
-alias gqs='git quick-stats'
+# if installed.
+# alias gqs='git quick-stats'
 
 # Diff So Fancy
+# if installed
 alias dsf='git diff --color | diff-so-fancy | less --tabs=4 -RFX'
 
 # Bundler
@@ -167,7 +170,7 @@ alias npml='npm list --depth=0'
 alias npmgl='npm list -g --depth=0'
 
 # YARN
-alias yarngl='yarn global list'
+# alias yarngl='yarn global list'
 
 # Homebrew
 alias brl='brew list -1'

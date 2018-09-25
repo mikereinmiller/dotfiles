@@ -1,7 +1,7 @@
 # ~/.zshrc
 
 # Exports
-export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+# export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 
 # Load OhMyZSH Plugins and Settings
 source $HOME/.dotfiles/shell/oh-my-zsh
@@ -13,7 +13,7 @@ source $HOME/.dotfiles/shell/aliases
 source $HOME/.dotfiles/shell/functions
 
 # Setup rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
+# export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # Setup chruby (if needed)
