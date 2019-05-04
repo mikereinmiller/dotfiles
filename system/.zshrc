@@ -1,7 +1,7 @@
 # ~/.zshrc
 
 # Exports
-# export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 
 # Load OhMyZSH Plugins and Settings
 source $HOME/.dotfiles/shell/oh-my-zsh
