@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs, plugins, and themes
 # For a full list of active aliases, run `alias`.
 
@@ -12,9 +10,9 @@ alias lt='ls -ltFh' 		# Long List By Date Show Human Readable
 alias ldot='ls -ld .*'	# Long List Show "." files
 alias tlf='tail -f'
 alias ..='cd ..'
-alias .2='cd ../../'
-alias .3='cd ../../../'
-alias .4='cd ../../../../'
+alias ..2='cd ../../'
+alias ..3='cd ../../../'
+alias ..4='cd ../../../../'
 
 # View PIDs by tcp port
 alias lpid='lsof -i tcp:3000'
@@ -204,3 +202,10 @@ alias src=reload
 
 # Substitue 'code-insiders' for 'code'
 alias code=code-insiders
+
+# Function to make and cd to directory
+mkcd () {
+  mkdir "$1" && cd $_
+  # mkdir "$1"
+  # cd "$1"
+}
