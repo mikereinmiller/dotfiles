@@ -7,7 +7,7 @@ alias lla='ls -la'			# Long List All
 alias l='ls -lFh'				# Long List by Size Show Human Readable
 alias la='ls -lAFh'			# Long List Show all Human Readable
 alias lt='ls -ltFh' 		# Long List By Date Show Human Readable
-alias ldot='ls -ld .*'	# Long List Show "." files
+alias l.='ls -ld .*'	# Long List Show "." files
 alias tlf='tail -f'
 alias ..='cd ..'
 alias ..2='cd ../../'
@@ -18,17 +18,11 @@ alias ..4='cd ../../../../'
 alias lpid='lsof -i tcp:3000'
 alias kpid='kill -9'
 
-# Exa LS alternative
-# if installed.
-# alias exl='exa -l'
-# alias exla='exa -la'
-# alias exlg='exa -la --git'
-
 # Quick File Views / Edits
 alias db='cd ~/Dropbox'
 alias dl='cd ~/Downloads'
 alias dd='cd ~/Desktop'
-alias dw='cd ~/Workspace'
+alias dc='cd ~/Code'
 alias ed='$EDITOR ~/.dotfiles'
 alias ea='$EDITOR ~/.dotfiles/shell/aliases'
 alias ef='$EDITOR ~/.dotfiles/shell/functions'
@@ -93,14 +87,6 @@ alias gsl='git shortlog -sn'
 # alias gdab=git for-each-ref --format '%(refname:short)' refs/heads | grep -v "master" | grep -v "$(git_current_branch)" | xargs git branch -d
 # alias gdabf=git for-each-ref --format '%(refname:short)' refs/heads | grep -v "master" | grep -v "$(git_current_branch)" | xargs git branch -D
 
-# https://github.com/arzzen/git-quick-stats
-# if installed.
-# alias gqs='git quick-stats'
-
-# Diff So Fancy
-# if installed
-alias dsf='git diff --color | diff-so-fancy | less --tabs=4 -RFX'
-
 # Bundler
 alias b='bundle'
 alias be='bundle exec'
@@ -135,6 +121,7 @@ alias rdsl='rake db:schema:load'
 alias rr='rake routes'
 alias rrg='rake routes | grep'
 alias rt='rake test'
+alias migrate='rake db:migrate db:rollback && rake db:migrate db:test:prepare'
 
 # Elixir / Phoenix - https://hexdocs.pm/phoenix/phoenix_mix_tasks.html
 alias imix='iex -S mix'
@@ -183,13 +170,6 @@ alias brup='brew upgrade'
 alias brupa='brew upgade --all'
 alias brun='brew uninstall'
 
-# Mac App Store (https://github.com/argon/mas)
-# alias masi='mas install'
-# alias masl='mas list'
-# alias maso='mas outdated'
-# alias mass='mas search'
-# alias masu='mas upgrade'
-
 # Misc
 alias path='echo $PATH | tr -s ":" "\n"'
 alias reload="source ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
@@ -202,10 +182,3 @@ alias src=reload
 
 # Substitue 'code-insiders' for 'code'
 alias code=code-insiders
-
-# Function to make and cd to directory
-mkcd () {
-  mkdir "$1" && cd $_
-  # mkdir "$1"
-  # cd "$1"
-}
