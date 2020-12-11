@@ -14,7 +14,7 @@ source $HOME/.dotfiles/shell/functions
 
 # Setup rbenv
 # export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
 
 # Setup chruby (if needed)
 # source /usr/local/share/chruby/chruby.sh
@@ -32,3 +32,8 @@ eval "$(rbenv init -)"
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export RBENV_ROOT=$HOME/.rbenv
+export MYSQL_PORT_3306_TCP_ADDR=127.0.0.1
+export MYSQL_SLAVE_PORT_3306_TCP_ADDR=127.0.0.1
+export MYSQL_SLAVE_PORT_3306_TCP_PORT=3307
+export PATH="/usr/local/opt/mysql-client/bin:$PATH"
