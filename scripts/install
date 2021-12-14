@@ -2,59 +2,120 @@
 
 set -e
 
-# ------------------------------------------------------------------------------
-# :: Load Global Variables and Functions
-# ------------------------------------------------------------------------------
+export EDITOR='code'
 export DOTFILES_DIR="${HOME}/.dotfiles"
 
-fancy_echo() {
-  local fmt="$1"; shift
-  printf "\n$fmt\n" "$@"
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+MAGENTA='\033[0;35m'
+CYAN='\033[0;36m'
+NONE='\033[0m'
+
+echo_nice() { printf "${NONE}${1}${NONE}\n" "$@" ; }
+echo_red() { printf "${RED}${1}${NONE}\n" "$@" ; }
+echo_green() { printf "${GREEN}${1}${NONE}\n" "$@" ; }
+echo_yellow() { printf "${YELLOW}${1}${NONE}\n" "$@" ; }
+echo_blue() { printf "${BLUE}${1}${NONE}\n" "$@" ; }
+echo_magenta() { printf "${MAGENTA}${1}${NONE}\n" "$@" ; }
+echo_cyan() { printf "${CYAN}${1}${NONE}\n" "$@" ; }
+
+ask_question() {
+  echo_cyan "$1 [Y/n]"
+  read answer
+
+  case $answer in
+  [Yy*])
+      return $(true)
+      ;;
+  *)
+      return $(false)
+      ;;
+  esac
 }
 
-# ------------------------------------------------------------------------------
-# :: Clone DOTFILES Repo (if !exist)
-# ------------------------------------------------------------------------------
-if [ ! -d $DOTFILES_DIR ]; then
-  fancy_echo "Cloning dotfiles..."
-  git clone git@github.com:mikereinmiller/dotfiles.git $DOTFILES_DIR
-fi
-
-# ------------------------------------------------------------------------------
-# :: Backup and Link .dotfiles
-# ------------------------------------------------------------------------------
-
-# Create Backup directory !found
-if [ ! -d $DOTFILES_DIR/backups ]; then
-  mkdir $DOTFILES_DIR/backups
-fi
-
-# Grab all .files from 'system' directory
-files=$DOTFILES_DIR/system/.??*
-
-# For Each File, backup and create a symlink to new .file
-for file in $files; do 
-  filename=$(basename $file)
-
-  # Move original file to backup directory
-  if [ -f $HOME/$filename ]; then
-    fancy_echo "Backing up $filename to $DOTFILES_DIR/backups/$filename"
-    mv $HOME/$filename $DOTFILES_DIR/backups/$filename
+setup_zim() {
+  # Check for ZSH
+  if ! command -v zsh >/dev/null 2>&1; then
+      echo_red "Zsh not installed.  Install and run again."
+      return $(false)
   fi
 
-  # Link new dotfiles to home directory
-  fancy_echo "Linking $filename to $DOTFILES_DIR/system/$filename"
-  ln -sf $DOTFILES_DIR/system/$filename $HOME/$filename
-done
+  # Check for ZIMFW - https://zimfw.sh/docs/
+  if [ ! -d $HOME/.zim ]; then
+    echo_nice "Installing ZIMFW..."
+    curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
+  fi
 
-# Finally Create gitconfig.local for personal git information
-if [ ! -f $DOTFILES/.gitconfig.local ]; then
-  fancy_echo "What is your GIT Author Name?"
-  read author_name
-  fancy_echo "What is your GIT Author Email?"
-  read author_email
+  if [[ $SHELL != *"zsh" ]] && ask_question "Set ZSH as the default shell?"; then
+    chsh -s $(which zsh)
+  fi
+}
 
-  echo "[user]\n\tname = $author_name\n\temail = $author_email\n" >> $DOTFILES_DIR/.gitconfig.local
+backup_files() {
+  # Create Backup directory !found
+  if [ ! -d $DOTFILES_DIR/backups ]; then
+    mkdir $DOTFILES_DIR/backups
+  fi
 
-  fancy_echo "Your custom gitconfig has been created, please make any additional changes to $DOTFILES/.gitconfig.local"
-fi
+  # Grab all .files from 'system' directory
+  files=$DOTFILES_DIR/system/.??*
+
+  # For Each File, backup and create a symlink to new .file
+  for file in $files; do 
+    if [ ! -f $file ]; then
+      return
+    fi
+
+    filename=$(basename $file)
+
+    # Move original file to backup directory
+    if [ -f $HOME/$filename ] && [ ! -f $DOTFILES_DIR/backups/$filename]; then
+      echo_nice "Backing up $filename to $DOTFILES_DIR/backups/$filename"
+      mv $HOME/$filename $DOTFILES_DIR/backups/$filename
+    fi
+
+    # Link new dotfiles to home directory
+    if [ ! -L $HOME/$filename ]; then
+      echo_nice "Linking $filename to $DOTFILES_DIR/system/$filename"
+      ln -sf $DOTFILES_DIR/system/$filename $HOME/$filename
+    fi
+  done
+}
+
+main() {
+  if ! command -v git >/dev/null 2>&1; then
+    echo_red "Git not installed.  Install Git and run again."
+    return $(false)
+  fi
+
+  if [ ! -d $DOTFILES_DIR ]; then
+    echo_nice "Cloning dotfiles..."
+    git clone git@github.com:mikereinmiller/dotfiles.git $DOTFILES_DIR
+  fi
+
+  if ask_question "Do you want to install and setup zimfw?"; then
+    setup_zim
+  fi
+
+  backup_files
+
+  # Finally Create gitconfig.local for personal git information
+  if [ ! -f $DOTFILES/.gitconfig.local ]; then
+    echo_cyan "What is your GIT Author Name?"
+    read author_name
+    echo_cyan "What is your GIT Author Email?"
+    read author_email
+
+    echo "[user]\n\tname = $author_name\n\temail = $author_email\n" >> $DOTFILES_DIR/.gitconfig.local
+  fi
+
+  if [ ! -f $DOTFILES_DIR/.zsh.local ] ; then
+    echo "#!/usr/bin/env bash\n" >> $DOTFILES_DIR/.zsh.local
+  fi
+
+  echo_green "Dotfiles are setup, checkout the $DOTFILES_DIR/.gitconfig.local and $DOTFILES_DIR/.zsh.local for custom settings"
+}
+
+main
