@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+MAGENTA='\033[0;35m'
+CYAN='\033[0;36m'
+NONE='\033[0m'
+
+echo_nice() { printf "${NONE}${1}${NONE}\n" "$@" ; }
+echo_red() { printf "${RED}${1}${NONE}\n" "$@" ; }
+echo_green() { printf "${GREEN}${1}${NONE}\n" "$@" ; }
+echo_yellow() { printf "${YELLOW}${1}${NONE}\n" "$@" ; }
+echo_blue() { printf "${BLUE}${1}${NONE}\n" "$@" ; }
+echo_magenta() { printf "${MAGENTA}${1}${NONE}\n" "$@" ; }
+echo_cyan() { printf "${CYAN}${1}${NONE}\n" "$@" ; }
+
+ask_question() {
+  echo_cyan "$1 [Y/n]"
+  read answer
+
+  case $answer in
+  [Yy*])
+      return $(true)
+      ;;
+  *)
+      return $(false)
+      ;;
+  esac
+}

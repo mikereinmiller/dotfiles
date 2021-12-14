@@ -2,43 +2,37 @@
 
 set -e
 
-# ------------------------------------------------------------------------------
-# :: Load Global Variables and Functions
-# ------------------------------------------------------------------------------
+source "${HOME}/.dotfiles/scripts/functions"
+
 export DOTFILES_DIR="${HOME}/.dotfiles"
 
-fancy_echo() {
-  local fmt="$1"; shift
-  printf "\n$fmt\n" "$@"
+restore_files() {
+  files=$DOTFILES_DIR/system/.??*
+
+  for file in $files; do 
+    if [ ! -f $file ]; then
+      return
+    fi
+
+    filename=$(basename $file)
+
+    # Unlink new dotfiles from home directory
+    if [ -L $HOME/$filename ]; then
+      echo_nice "Removing link for $filename"
+      rm $HOME/$filename
+    fi
+
+    # Move original file back to home directory
+    if [ -f $DOTFILES_DIR/backups/$filename ]; then
+      echo_nice "Restoring Original file to $HOME/$filename"
+      mv $DOTFILES_DIR/backups/$filename $HOME/$filename
+    fi
+  done
 }
 
-# ------------------------------------------------------------------------------
-# :: Revert Backup files (Unset)
-# ------------------------------------------------------------------------------
+main() {
+  restore_files
+  echo_green "Make sure your files have been restored properly and then remove the $DOTFILES_DIR directory."
+}
 
-# Grab all .files from 'system' directory
-files=$DOTFILES_DIR/system/.??*
-
-# For Each File, backup and create a symlink to new .file
-for file in $files; do 
-  filename=$(basename $file)
-
-  # Unlink new dotfiles from home directory
-  if [ -L $HOME/$filename ]; then
-  	fancy_echo "Removing link for $filename"
-  	rm $HOME/$filename
-  fi
-
-  # Move original file back to home directory
-  if [ -f $DOTFILES_DIR/backups/$filename ]; then
-  	fancy_echo "Restoring Original file to $HOME/$filename"
-  	mv $DOTFILES_DIR/backups/$filename $HOME/$filename
-  fi
-done
-
-# Remove custom .gitconfig.local file
-if [ -f $HOME/.gitconfig.local ]; then
-  rm $HOME/.gitconfig.local
-fi
-
-fancy_echo "Make sure your files have been restored properly and then remove the $DOTFILES_DIR directory."
+main
