@@ -1,3 +1,11 @@
+# TODO:
+DotFiles are being re-worked
+
+* Test Install Script
+* Update Uninstall Script
+* Update README
+* Add App config/settings?
+
 # Dotfiles
 
 A collection of dotfiles and scripts I use for customizing macOS to my liking.

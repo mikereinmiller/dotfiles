@@ -1,188 +1,47 @@
-# Set personal aliases, overriding those provided by oh-my-zsh libs, plugins, and themes
+# Set personal aliases, overriding those provided by libs, plugins, and themes
 # For a full list of active aliases, run `alias`.
 
-# Unix
-alias ll='ls -l'				# Long List
-alias lla='ls -la'			# Long List All
-alias l='ls -lFh'				# Long List by Size Show Human Readable
-alias la='ls -lAFh'			# Long List Show all Human Readable
-alias lt='ls -ltFh' 		# Long List By Date Show Human Readable
-alias l.='ls -ld .*'	# Long List Show "." files
-alias tlf='tail -f'
+alias reload="source ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
+
+alias tl='tail -f'
+alias tld='tail -f log/development.log'
+
+alias ll='ls -l'
+alias lla='ls -la'
 alias ..='cd ..'
 alias ..2='cd ../../'
 alias ..3='cd ../../../'
 alias ..4='cd ../../../../'
 
-# View PIDs by tcp port
-alias lpid='lsof -i tcp:3000'
-alias kpid='kill -9'
-
 # Quick File Views / Edits
-alias db='cd ~/Dropbox'
 alias dl='cd ~/Downloads'
 alias dd='cd ~/Desktop'
 alias dc='cd ~/Code'
+alias dw='cd ~/Workspace'
+
 alias ed='$EDITOR ~/.dotfiles'
-alias ea='$EDITOR ~/.dotfiles/shell/aliases'
-alias ef='$EDITOR ~/.dotfiles/shell/functions'
-alias eo='$EDITOR ~/.dotfiles/shell/oh-my-zsh'
 alias ez='$EDITOR ~/.dotfiles/system/.zshrc'
 alias ezl='$EDITOR ~/.dotfiles/.zsh.local'
 alias eh='$EDITOR /etc/hosts'
-alias hosts=eh
-alias zshrc=ez
-alias dotfiles=ed
 
 # OSX
 alias saf='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder'
 alias haf='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder'
 alias flush='sudo killall -HUP mDNSResponder'
 
-# GIT - https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/git/git.plugin.zsh
-alias g='git'
-alias gs='git status'
-alias ga='git add'
-alias gaa='git add --all'
-alias gc='git commit'
-alias gm='git merge'
-alias gcm='git commit -m'
-alias gac='git add -all && git commit -m'
-alias gb='git branch'
-alias gbd='git branch -d'
-alias gbdf='git branch -D'
-alias gd='git diff'
-alias go='git checkout'
-alias gom='git checkout master'
-alias gos='git checkout staging'
-alias gob='git checkout -b'
-alias gl='git pull'
-alias glr='git pull --rebase'
-alias gp='git push'
-alias gpf='git push -f'
-alias gpb='git push --set-upstream origin $(git_current_branch)'
-alias gr='git rebase'
-alias gra='git rebase --abort'
-alias grc='git rebase --continue'
-alias grm='git rebase master'
-alias gri='git rebase -i'
-alias grim='git rebase -i master'
-alias grh='git reset HEAD'
-alias grc='git clean -fd'
-alias grhh='git reset HEAD --hard'
-alias grhhc='git reset HEAD --hard && git clean -fd'
-alias gcl='git clone'
-alias gf='git fetch'
-alias glg='git log --stat --color'
-alias glo='git log --oneline --decorate --color'
-alias glog='git log --oneline --decorate --color --graph'
-alias gloa='git log --oneline --decorate --color --graph --all'
-alias glgg='git log --graph --color'
-alias glga='git log --graph --decorate --all'
-alias glgm='git log --graph --max-count=10'
-alias glgp='git log --stat --color --patch'
-alias glol='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
-alias gloa='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit --all'
-alias gsl='git shortlog -sn'
-
-# Destroy all local branches except master and current branch.  USE WITH CAUTION
-# alias gdab=git for-each-ref --format '%(refname:short)' refs/heads | grep -v "master" | grep -v "$(git_current_branch)" | xargs git branch -d
-# alias gdabf=git for-each-ref --format '%(refname:short)' refs/heads | grep -v "master" | grep -v "$(git_current_branch)" | xargs git branch -D
-
 # Bundler
 alias b='bundle'
 alias be='bundle exec'
 alias bi='bundle install'
-alias bu='bundle update'
-alias bef='bundle exec foreman start'
-alias bes='bundle exec spec'
-alias ber='bundle exec rspec'
-alias bera='bundle exec rake'
-
-# Ruby
-alias rbv='rbenv versions'
-alias rbl='rbenv install -l'
-alias rbi='rbenv install'
-
-alias pre='pry -r ./config/environment'
-
-# Rails
-alias rs='rails server'
-alias rc='rails console'
-alias rg='rails generate'
-alias rgm='rails generate migration'
-alias rdm='rake db:migrate'
-alias rdr='rake db:rollback'
-alias rdc='rake db:create'
-alias rds='rake db:seed'
-alias rdd='rake db:drop'
-alias rdrs='rake db:reset'
-alias rdtc='rake db:test:clone'
-alias rdtp='rake db:test:prepare'
-alias rdmtc='rake db:migrate db:test:clone'
-alias rdsl='rake db:schema:load'
-alias rr='rake routes'
-alias rrg='rake routes | grep'
-alias rt='rake test'
-alias migrate='rake db:migrate db:rollback && rake db:migrate db:test:prepare'
-
-# Elixir / Phoenix - https://hexdocs.pm/phoenix/phoenix_mix_tasks.html
-alias imix='iex -S mix'
-alias imixs='iex -S mix phx.server'
-alias mec='mix ecto.create'
-alias med='mix ecto.drop'
-alias mem='mix ecto.migrate'
-alias mer='mix ecto.rollback'
-alias megr='mix ecto.gen.repo'
-alias megm='mix ecto.gen.migration'
-alias mpgc='mix phx.gen.channel'
-alias mpgco='mix phx.gen.context'
-alias mpge='mix phx.gen.embedded'
-alias mpgh='mix phx.gen.html'
-alias mpgj='mix phx.gen.json'
-alias mpgp='mix phx.gen.presence'
-alias mpgs='mix phx.gen.schema'
-alias mpgse='mix phx.gen.secret'
-alias mpgn='mix phx.new'
-alias mps='mix phx.server'
-alias mpr='mix phx.routes'
 
 # NPM
-alias npmg='npm i -g'
-alias npms='npm i -S'
-alias npmd='npm i -D'
-alias npmo='npm outdated'
-alias npmog='npm outdated -g --depth=0'
-alias npmogu='npm -gp outdated | cut -d: -f4 | xargs -n1 npm -g install'
-alias npml='npm list --depth=0'
-alias npmgl='npm list -g --depth=0'
+alias ni='npm install'
+alias no='npm outdated'
+alias nog='npm outdated -g --depth=0'
+alias nl='npm list --depth=0'
+alias ngl='npm list -g --depth=0'
 
 # YARN
-alias yarngl='yarn global list'
+alias ygl='yarn global list'
 alias yi='yarn install'
-
-# Homebrew
-alias brl='brew list -1'
-alias brsl='brew services list'
-alias brsr='brew services restart'
-alias brs0='brew services stop'
-alias brs1='brew services start'
-alias brin='brew info'
-alias bri='brew install'
-alias bru='brew update'
-alias brup='brew upgrade'
-alias brupa='brew upgade --all'
-alias brun='brew uninstall'
-
-# Misc
-alias path='echo $PATH | tr -s ":" "\n"'
-alias reload="source ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
-alias reload!=reload
-alias src=reload
-
-# elixirVersion=$(elixir -v)
-# alias versions="echo 'Ruby: $(ruby -v)' '\nNode: $(node -v)' '\nNPM: $(npm -v)' '\nYarn: $(yarn --version)' '\nElixir: ${elixirVersion: -5}'"
-# alias versions="echo 'Ruby: $(ruby -v)' '\nNode: $(node -v)' '\nNPM: $(npm -v)' '\nElixir: ${elixirVersion: -5}'"
-
-# Substitue 'code-insiders' for 'code'
-alias code=code-insiders
+alias yo='yarn outdated'

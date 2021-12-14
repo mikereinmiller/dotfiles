@@ -2,10 +2,7 @@
 
 # Create a new directory and enter it
 function mkd() {
-	# mkdir -p "$@" && cd "$_";
-	# mkdir "$1"
-  # cd "$1"
-	mkdir "$1" && cd $_;
+	mkdir -p "$@" && cd "$_";
 }
 
 # `c` with no arguments opens the current directory in Code, otherwise opens the
