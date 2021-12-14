@@ -4,7 +4,6 @@ set -e
 
 source "${HOME}/.dotfiles/scripts/functions"
 
-export EDITOR='code'
 export DOTFILES_DIR="${HOME}/.dotfiles"
 
 setup_zim() {

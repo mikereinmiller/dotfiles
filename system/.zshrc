@@ -1,5 +1,7 @@
 # ~/.zshrc
 
+export EDITOR='code'
+
 # Load ZIM Plugins and Settings
 source "$HOME/.dotfiles/shell/zimfw"
 
