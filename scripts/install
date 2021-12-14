@@ -84,6 +84,21 @@ backup_files() {
   done
 }
 
+create_local_files() {
+  if [ ! -f $DOTFILES/.gitconfig.local ]; then
+    echo_cyan "What is your GIT Author Name?"
+    read author_name
+    echo_cyan "What is your GIT Author Email?"
+    read author_email
+
+    echo "[user]\n\tname = $author_name\n\temail = $author_email\n" >> $DOTFILES_DIR/.gitconfig.local
+  fi
+
+  if [ ! -f $DOTFILES_DIR/.zsh.local ] ; then
+    echo "#!/usr/bin/env bash\n" >> $DOTFILES_DIR/.zsh.local
+  fi
+}
+
 main() {
   if ! command -v git >/dev/null 2>&1; then
     echo_red "Git not installed.  Install Git and run again."
@@ -100,20 +115,7 @@ main() {
   fi
 
   backup_files
-
-  # Finally Create gitconfig.local for personal git information
-  if [ ! -f $DOTFILES/.gitconfig.local ]; then
-    echo_cyan "What is your GIT Author Name?"
-    read author_name
-    echo_cyan "What is your GIT Author Email?"
-    read author_email
-
-    echo "[user]\n\tname = $author_name\n\temail = $author_email\n" >> $DOTFILES_DIR/.gitconfig.local
-  fi
-
-  if [ ! -f $DOTFILES_DIR/.zsh.local ] ; then
-    echo "#!/usr/bin/env bash\n" >> $DOTFILES_DIR/.zsh.local
-  fi
+  create_local_files
 
   echo_green "Dotfiles are setup, checkout the $DOTFILES_DIR/.gitconfig.local and $DOTFILES_DIR/.zsh.local for custom settings"
 }
