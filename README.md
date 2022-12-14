@@ -1,6 +1,6 @@
 # Dotfiles
 
-A collection of dotfiles and scripts I use for customizing macOS to my liking.
+A collection of dotfiles and scripts I use.
 
 The installation will create backups of the dotfiles and store them in `~/.dotfiles/backups`. This will then create symlinks to the new files located in `~/.dotfiles/system`.
 
@@ -12,30 +12,13 @@ $ git clone https://github.com/mikereinmiller/dotfiles.git ~/.dotfiles
 $ sh ~/.dotfiles/scripts/install
 ```
 
-### Remotely using curl
-Alternatively, you can install this into `~/.dotfiles` remotely without Git using curl.
-
-```sh
-bash -c "$(curl -fsSL raw.github.com/mikereinmiller/dotfiles/master/scripts/install)"
-```
-
 ## Customize
 
 ### Local Settings
-You can extend the dotfiles to keep personal information or custom settings on your machine.  If any larger changes are needed it would be better to fork this repo.
+You can extend the dotfiles to keep personal information or custom settings on your machine.
 
 ### `~/.dotfiles/.zsh.local`
 This file is loaded at the end of the `~/.zshrc` file if it exist.  Create this file and add any settings or overrides you want loaded with zsh.
-
-
-### `~/.dotfiles/.gitconfig.local`
-The `~/.gitconfig` file will include the `~/.dotfiles/.gitconfig.local` file.  This is the perfect place to store any sensitive information such as git credentials or custom settings.
-
-```sh
-[user]
-  name = Mike McTesty
-  email = mike@test.com
-```
 
 ## Uninstall
 
@@ -48,4 +31,4 @@ $ sh ~/.dotfiles/scripts/uninstall
 Make sure all your dotfiles and settings have been restored and destroy the dotfile directory `rm -rf ~/.dotfiles`.
 
 # TODO:
-  * Add App config/settings, (terminal, vscode, etc)?
+  * Add App config/settings, (terminal, vscode, etc)

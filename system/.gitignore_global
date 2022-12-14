@@ -14,14 +14,25 @@ Thumbs.db
 # Compiled Python files
 *.pyc
 
-# npm & bower
+# yarn, npm & bower, ect
+/.bundle
 bower_components
 node_modules
 npm-debug.log
+yarn-deubg.log*
+.yarn-integrity
+/log/*.log
+/log*.log.*
+/tmp/*
 
 # IDEs stuff
-.idea
+.vscode
+.idea/*
 *.swp
 .log
 .sql
 .sass-cache/
+.tool-versions
+.rspec
+.powder
+.powenv

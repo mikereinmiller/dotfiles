@@ -6,24 +6,6 @@ source "${HOME}/.dotfiles/scripts/functions"
 
 export DOTFILES_DIR="${HOME}/.dotfiles"
 
-setup_zim() {
-  # Check for ZSH
-  if ! command -v zsh >/dev/null 2>&1; then
-      echo_red "Zsh not installed.  Install and run again."
-      return $(false)
-  fi
-
-  # Check for ZIMFW - https://zimfw.sh/docs/
-  if [ ! -d $HOME/.zim ]; then
-    echo_nice "Installing ZIMFW..."
-    curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
-  fi
-
-  if [[ $SHELL != *"zsh" ]] && ask_question "Set ZSH as the default shell?"; then
-    chsh -s $(which zsh)
-  fi
-}
-
 backup_files() {
   # Create Backup directory !found
   if [ ! -d $DOTFILES_DIR/backups ]; then
@@ -56,35 +38,12 @@ backup_files() {
 }
 
 create_local_files() {
-  if [ ! -f $DOTFILES_DIR/.gitconfig.local ]; then
-    echo_cyan "What is your GIT Author Name?"
-    read author_name
-    echo_cyan "What is your GIT Author Email?"
-    read author_email
-
-    echo "[user]\n\tname = $author_name\n\temail = $author_email\n" >> $DOTFILES_DIR/.gitconfig.local
-  fi
-
   if [ ! -f $DOTFILES_DIR/.zsh.local ] ; then
     echo "#!/usr/bin/env bash\n" >> $DOTFILES_DIR/.zsh.local
   fi
 }
 
 main() {
-  if ! command -v git >/dev/null 2>&1; then
-    echo_red "Git not installed.  Install Git and run again."
-    return $(false)
-  fi
-
-  if [ ! -d $DOTFILES_DIR ]; then
-    echo_nice "Cloning dotfiles..."
-    git clone git@github.com:mikereinmiller/dotfiles.git $DOTFILES_DIR
-  fi
-
-  if ask_question "Do you want to install and setup zimfw?"; then
-    setup_zim
-  fi
-
   backup_files
   create_local_files
 

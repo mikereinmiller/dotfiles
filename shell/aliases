@@ -1,47 +1,91 @@
-# Set personal aliases, overriding those provided by libs, plugins, and themes
 # For a full list of active aliases, run `alias`.
 
-alias reload="source ~/.zshrc && echo 'ZSH config reloaded from ~/.zshrc'"
+# Make alt + arrow keys work correctly (move words)
+bindkey "[D" backward-word # ALT-left-arrow  ⌥ + ←
+bindkey "[C" forward-word  # ALT-right-arrow ⌥ + →
 
-alias tl='tail -f'
-alias tld='tail -f log/development.log'
+export EDITOR='code'
 
+alias reload='source ~/.zshrc && echo "ZSH config reloaded from ~/.zshrc"'
+alias reload!='reload'
+
+alias e='$EDITOR'
+alias e.='$EDITOR .'
+alias ed='$EDITOR ~/.dotfiles'
+alias ez='$EDITOR ~/.zprezto'
+alias eh='$EDITOR /etc/hosts'
+
+alias c='clear'
+alias l='ls -1'
 alias ll='ls -l'
 alias lla='ls -la'
-alias ..='cd ..'
-alias ..2='cd ../../'
-alias ..3='cd ../../../'
-alias ..4='cd ../../../../'
-
-# Quick File Views / Edits
-alias dl='cd ~/Downloads'
-alias dd='cd ~/Desktop'
 alias dc='cd ~/Code'
 alias dw='cd ~/Workspace'
 
-alias ed='$EDITOR ~/.dotfiles'
-alias ez='$EDITOR ~/.dotfiles/system/.zshrc'
-alias ezl='$EDITOR ~/.dotfiles/.zsh.local'
-alias eh='$EDITOR /etc/hosts'
-
-# OSX
-alias saf='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder'
-alias haf='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder'
-alias flush='sudo killall -HUP mDNSResponder'
+# GIT
+alias g="git"
+alias gs="git status"
+alias gss="git status --short"
+alias gp="git push"
+alias gbc="git symbolic-ref --short HEAD"
+alias gpb='git push --set-upstream origin "$(git symbolic-ref --short HEAD)"'
+alias gpF="git push --force"
+alias gf="git fetch"
+alias gfm="git fetch && git pull --rebase"
+alias gl="git pull"
+alias gb="git branch"
+alias grh="git reset --hard"
+alias grhh="git reset --hard HEAD"
+alias gcl="git clean -df"
+alias grhhc="grhh && gcl"
+alias gd="git diff"
+alias gc="git commit -m"
+alias gco="git checkout"
+alias gcob="git checkout -b"
+alias gco-="gco -"
+alias gcos="gco staging; gf origin staging; git reset --hard origin/staging"
+alias gcom="gco main; gfm"
+alias gm="git merge"
+alias gm-="git merge -"
+alias ga="git add"
+alias ga.="git add ."
+alias gsh="git stash"
+alias gsha="git stash apply"
+alias gshp="git stash pop"
+alias gbd="git branch -d"
+alias gbdf="git branch -d --force"
+alias glg="git log"
+alias glgp="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --all --abbrev-commit"
+alias gself="glgp --author '$(git config --get user.name)'"
+alias g1d="gself --since='1 day ago'"
+alias glb="git lb"
 
 # Bundler
 alias b='bundle'
 alias be='bundle exec'
 alias bi='bundle install'
 
+# Yarn
+alias yi='yarn install'
+alias yo='yarn outdated'
+alias ygl='yarn global list'
+
+alias byi='bi && yi'
+
 # NPM
 alias ni='npm install'
 alias no='npm outdated'
+alias ngl='npm list -g --depth=0'
 alias nog='npm outdated -g --depth=0'
 alias nl='npm list --depth=0'
-alias ngl='npm list -g --depth=0'
 
-# YARN
-alias ygl='yarn global list'
-alias yi='yarn install'
-alias yo='yarn outdated'
+# Rails
+alias tl='tail -f'
+alias tld='tail -f log/development.log'
+alias rc='rails console'
+
+# OSX
+alias saf='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder'
+alias haf='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder'
+alias flush='sudo killall -HUP mDNSResponder'
+

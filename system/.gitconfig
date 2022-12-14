@@ -1,34 +1,21 @@
 [core]
 	editor = vi
-	ignorecase = false
-	pager = ""
-
+	pager = "less -FX"
+	excludesFile = /Users/mike/.gitignore_global
 [color]
-	ui = always
-
-[color "diff"]
-	meta = "yellow bold"
-	commit = "green bold"
-	frag = "magenta bold"
-	old = "red bold"
-	new = "green bold"
-	whitespace = "red reverse"
-
-[color "diff-highlight"]
-	oldNormal = "red bold"
-	oldHighlight = "red bold 52"
-	newNormal = "green bold"
-	newHighlight = "green bold 22"
-
-[color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
-
-[color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
-
-[include]
-	path = ~/.dotfiles/.gitconfig.local
+	ui = auto
+[push]
+	default = current
+	autoSetupRemote = true
+[user]
+	name = Mike Reinmiller
+	email = mikereinmiller@gmail.com
+[github]
+	user = mikereinmiller
+[alias]
+	lb = !git reflog show --pretty=format:'%gs ~ %gd' --date=relative | grep 'checkout:' | grep -oE '[^ ]+ ~ .*' | awk -F~ '!seen[$1]++' | head -n 10 | awk -F' ~ HEAD@{' '{printf(\"  \\033[33m%s: \\033[37m %s\\033[0m\\n\", substr($2, 1, length($2)-1), $1)}'
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
